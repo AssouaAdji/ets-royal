@@ -66,7 +66,7 @@ export default function AdminDashboard() {
 
         {/* Tabs for different sections */}
         <Tabs defaultValue="food" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          <TabsList className="grid w-full max-w-md grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             <TabsTrigger value="food">
               <ShoppingBag className="h-4 w-4 mr-2" />
               Alimentation
