@@ -81,7 +81,7 @@ export function Header() {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <nav className="md:hidden py-4 flex flex-col gap-4">
+          <nav className="md:hidden py-4 flex flex-col gap-4 items-center">
             <Link
               href="/"
               className="text-sm font-medium hover:text-primary transition-colors"
@@ -118,7 +118,7 @@ export function Header() {
               {t("about")}
             </Link>
 
-            <div className="flex gap-2 items-center pt-2 border-t">
+            <div className="flex gap-2 items-center pt-2 border-t justify-center">
               <button
                 onClick={toggleTheme}
                 className="flex-1 p-2 rounded-lg border hover:bg-secondary transition-colors"

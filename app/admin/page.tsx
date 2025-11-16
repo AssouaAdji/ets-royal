@@ -66,7 +66,7 @@ export default function AdminDashboard() {
 
         {/* Tabs for different sections */}
         <Tabs defaultValue="food" className="space-y-6">
-          <TabsList className="grid w-full max-w-md grid-cols-3">
+          <TabsList className="grid w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             <TabsTrigger value="food">
               <ShoppingBag className="h-4 w-4 mr-2" />
               Alimentation
@@ -76,6 +76,7 @@ export default function AdminDashboard() {
               Cosmétiques
             </TabsTrigger>
             <TabsTrigger value="categories">Catégories</TabsTrigger>
+            <TabsTrigger value="messages">Messages</TabsTrigger>
           </TabsList>
 
           <TabsContent value="food">
@@ -89,9 +90,78 @@ export default function AdminDashboard() {
           <TabsContent value="categories">
             <CategoriesTable />
           </TabsContent>
+
+          <TabsContent value="messages">
+            <MessagesTable />
+          </TabsContent>
         </Tabs>
       </div>
     </div>
+  )
+}
+
+function MessagesTable() {
+  const [messages] = useState([
+    { id: 1, name: "John Doe", email: "john.doe@example.com", subject: "Demande de devis", date: "2023-10-26", status: "Nouveau" },
+    { id: 2, name: "Jane Smith", email: "jane.smith@example.com", subject: "Question sur un produit", date: "2023-10-25", status: "Lu" },
+    { id: 3, name: "Peter Jones", email: "peter.jones@example.com", subject: "Problème de commande", date: "2023-10-24", status: "Résolu" },
+  ])
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Messages</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="rounded-md border">
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b bg-muted/50">
+                  <th className="h-12 px-4 text-left align-middle font-medium text-sm">ID</th>
+                  <th className="h-12 px-4 text-left align-middle font-medium text-sm">Nom</th>
+                  <th className="h-12 px-4 text-left align-middle font-medium text-sm">Email</th>
+                  <th className="h-12 px-4 text-left align-middle font-medium text-sm">Sujet</th>
+                  <th className="h-12 px-4 text-left align-middle font-medium text-sm">Date</th>
+                  <th className="h-12 px-4 text-left align-middle font-medium text-sm">Statut</th>
+                  <th className="h-12 px-4 text-left align-middle font-medium text-sm">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {messages.map((message) => (
+                  <tr key={message.id} className="border-b">
+                    <td className="p-4 text-sm">{message.id}</td>
+                    <td className="p-4 text-sm font-medium">{message.name}</td>
+                    <td className="p-4 text-sm">{message.email}</td>
+                    <td className="p-4 text-sm">{message.subject}</td>
+                    <td className="p-4 text-sm">{message.date}</td>
+                    <td className="p-4 text-sm">
+                      <span
+                        className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
+                          message.status === "Nouveau"
+                            ? "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100"
+                            : message.status === "Lu"
+                            ? "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-100"
+                            : "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100"
+                        }`}
+                      >
+                        {message.status}
+                      </span>
+                    </td>
+                    <td className="p-4 text-sm">
+                      <div className="flex gap-2">
+                        <button className="text-blue-600 hover:text-blue-800 text-xs">Voir</button>
+                        <button className="text-red-600 hover:text-red-800 text-xs">Supprimer</button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
   )
 }
 
